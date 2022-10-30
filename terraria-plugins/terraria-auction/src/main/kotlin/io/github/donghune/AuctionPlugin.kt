@@ -2,13 +2,13 @@ package io.github.donghune
 
 import io.github.donghune.api.BasePlugin
 
-lateinit var templatePlugin: TemplatePlugin
+lateinit var templatePlugin: AuctionPlugin
 
-class TemplatePlugin : BasePlugin() {
+class AuctionPlugin : BasePlugin() {
     override fun onEnable() {
         super.onEnable()
         templatePlugin = this
-        TemplateCommand.initialize(this)
+        AuctonCommand.initialize(this)
     }
 
     override fun onDisable() {

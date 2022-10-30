@@ -1,6 +1,6 @@
-name: BingoPlugin
+name: Auction
 version: '${version}'
-main: io.github.donghune.BingoPlugin
+main: io.github.donghune.AuctionPlugin
 api-version: 1.16
 prefix: DHE
 description: minecraft project donghune source
@@ -8,6 +8,7 @@ commands:
   bingo:
 libraries:
   - net.kyori:adventure-api:4.10.1
+  - io.github.monun:kommand-core:2.14.0
   - org.jetbrains.kotlin:kotlin-stdlib:1.5.30
   - org.jetbrains.kotlin:kotlin-reflect:1.5.30
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1

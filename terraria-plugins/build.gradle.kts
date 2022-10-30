@@ -1,7 +1,7 @@
 val pluginProject = project
 
 subprojects {
-    val projectName = name
+    val projectName = name.removePrefix("terraria-")
     val sep = File.separator
     val buildFolder = "${buildDir.absolutePath}${sep}libs$sep${project.name}.jar"
 
@@ -11,7 +11,7 @@ subprojects {
         doLast {
             copy {
                 from(buildFolder)
-                into("${pluginProject.rootDir.absolutePath}${sep}.server${sep}plugins${sep}")
+                into("${pluginProject.rootDir.absolutePath}${sep}.server${sep}plugins-dev${sep}")
             }
         }
     }
@@ -25,7 +25,6 @@ subprojects {
     if (version == "unspecified") {
         version = rootProject.version
     }
-
 
     tasks {
         processResources {

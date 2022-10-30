@@ -1,6 +1,16 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath("gradle.plugin.com.github.johnrengelman:shadow:7.1.2")
+    }
+}
+
 plugins {
     kotlin("jvm") version "1.7.10"
 }
+
 
 java {
     toolchain {
@@ -9,6 +19,12 @@ java {
 }
 
 allprojects {
+    apply(plugin = "com.github.johnrengelman.shadow")
+
+    tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+        archiveFileName.set("${project.name}.jar")
+    }
+
     repositories {
         mavenCentral()
     }

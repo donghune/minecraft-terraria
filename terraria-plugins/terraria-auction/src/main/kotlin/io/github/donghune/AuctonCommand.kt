@@ -2,8 +2,8 @@ package io.github.donghune
 
 import io.github.monun.kommand.kommand
 
-object TemplateCommand {
-    fun initialize(plugin: TemplatePlugin) {
+object AuctonCommand {
+    fun initialize(plugin: AuctionPlugin) {
         plugin.kommand {
             register("bingo") {
                 then("start") {
