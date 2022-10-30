@@ -1,0 +1,58 @@
+plugins {
+    kotlin("jvm") version "1.7.10"
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+
+    repositories {
+        maven("https://papermc.io/repo/repository/maven-public/")
+    }
+
+    dependencies {
+        compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
+
+        implementation(kotlin("stdlib"))
+        implementation(kotlin("reflect"))
+
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+
+        implementation("io.github.monun:kommand-api:2.14.0")
+        implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.6.0")
+        implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.6.0")
+    }
+}
+
+tasks {
+    register<DefaultTask>("setupModules") {
+        doLast {
+            val defaultPrefix = "carrot"
+            val projectPrefix = rootProject.name
+
+            if (defaultPrefix != projectPrefix) {
+                fun rename(suffix: String) {
+                    val from = "$defaultPrefix-$suffix"
+                    val to = "$projectPrefix-$suffix"
+                    file(from).takeIf { it.exists() }?.renameTo(file(to))
+                }
+
+                rename("plugins")
+                rename("library")
+            }
+        }
+    }
+}

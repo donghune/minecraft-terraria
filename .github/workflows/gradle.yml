@@ -1,0 +1,78 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Get current date
+        run: echo "MY_DATE=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+        with:
+          arguments: clean build shadowJar
+
+      - name: Upload a file to Google Drive
+        uses: willo32/google-drive-upload-action@v1
+        with:
+          target: carrot-plugins/carrot-bingo/build/libs/carrot-bingo.jar
+          credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
+          parent_folder_id: 1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI
+          child_folder: ${{ env.MY_DATE }}
+
+      - name: Upload a file to Google Drive
+        uses: willo32/google-drive-upload-action@v1
+        with:
+          target: carrot-plugins/carrot-visitor/build/libs/carrot-visitor.jar
+          credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
+          parent_folder_id: 1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI
+          child_folder: ${{ env.MY_DATE }}
+
+      - name: Upload a file to Google Drive
+        uses: willo32/google-drive-upload-action@v1
+        with:
+          target: carrot-plugins/carrot-custom-regen/build/libs/carrot-custom-regen.jar
+          credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
+          parent_folder_id: 1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI
+          child_folder: ${{ env.MY_DATE }}
+
+      - name: Upload a file to Google Drive
+        uses: willo32/google-drive-upload-action@v1
+        with:
+          target: carrot-plugins/carrot-fishgame/build/libs/carrot-fishgame.jar
+          credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
+          parent_folder_id: 1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI
+          child_folder: ${{ env.MY_DATE }}
+
+      - name: Send message to discord channel
+        uses: aar0nsky/discord-webhook-github-action@main
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          message: 플러그인이 새로운 버전으로 업데이트 되었습니다!!\nhttps://drive.google.com/drive/folders/1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI?usp=sharing

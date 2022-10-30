@@ -1,0 +1,17 @@
+name: BingoPlugin
+version: '${version}'
+main: io.github.donghune.BingoPlugin
+api-version: 1.16
+prefix: DHE
+description: minecraft project donghune source
+commands:
+  bingo:
+libraries:
+  - net.kyori:adventure-api:4.10.1
+  - org.jetbrains.kotlin:kotlin-stdlib:1.5.30
+  - org.jetbrains.kotlin:kotlin-reflect:1.5.30
+  - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1
+  - org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.2
+  - org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2
+  - com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.6.0
+  - com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.6.0
