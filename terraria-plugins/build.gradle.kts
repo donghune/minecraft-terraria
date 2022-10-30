@@ -36,7 +36,7 @@ subprojects {
     }
 
     dependencies {
-        implementation(project(":sample-library"))
+        implementation(project(":terraria-library"))
     }
 }
 
