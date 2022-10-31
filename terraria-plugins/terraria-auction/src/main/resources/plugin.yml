@@ -1,13 +1,14 @@
 name: Auction
 version: '${version}'
 main: io.github.donghune.AuctionPlugin
-api-version: 1.16
+api-version: 1.18
 prefix: DHE
 description: minecraft project donghune source
 commands:
-  bingo:
+  auction:
 libraries:
   - net.kyori:adventure-api:4.10.1
+  - io.github.monun:kommand-api:2.14.0
   - io.github.monun:kommand-core:2.14.0
   - org.jetbrains.kotlin:kotlin-stdlib:1.5.30
   - org.jetbrains.kotlin:kotlin-reflect:1.5.30

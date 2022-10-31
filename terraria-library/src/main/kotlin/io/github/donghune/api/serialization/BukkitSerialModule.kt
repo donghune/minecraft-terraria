@@ -21,6 +21,7 @@ val BukkitSerialModule = SerializersModule {
     contextual(UUIDSerializer)
     contextual(BoundingBoxSerializer)
     contextual(IntRangeSerializer)
+    contextual(LocalDateTimeSerializer)
 }
 
 val json = Json {

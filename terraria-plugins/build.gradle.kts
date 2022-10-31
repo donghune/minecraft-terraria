@@ -35,7 +35,7 @@ subprojects {
     }
 
     dependencies {
-        implementation(project(":terraria-library"))
+        compileOnly(project(":terraria-library"))
     }
 }
 

@@ -2,9 +2,6 @@ buildscript {
     repositories {
         gradlePluginPortal()
     }
-    dependencies {
-        classpath("gradle.plugin.com.github.johnrengelman:shadow:7.1.2")
-    }
 }
 
 plugins {
@@ -19,12 +16,6 @@ java {
 }
 
 allprojects {
-    apply(plugin = "com.github.johnrengelman.shadow")
-
-    tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
-        archiveFileName.set("${project.name}.jar")
-    }
-
     repositories {
         mavenCentral()
     }
@@ -40,16 +31,16 @@ subprojects {
     dependencies {
         compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
 
-        implementation(kotlin("stdlib"))
-        implementation(kotlin("reflect"))
+        compileOnly(kotlin("stdlib"))
+        compileOnly(kotlin("reflect"))
 
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+        compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+        compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
+        compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
-        implementation("io.github.monun:kommand-api:2.14.0")
-        implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.6.0")
-        implementation("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.6.0")
+        compileOnly("io.github.monun:kommand-api:2.14.0")
+        compileOnly("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.6.0")
+        compileOnly("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.6.0")
     }
 }
 

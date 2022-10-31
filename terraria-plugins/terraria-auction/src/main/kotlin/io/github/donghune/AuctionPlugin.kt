@@ -1,18 +1,14 @@
 package io.github.donghune
 
-import io.github.donghune.api.BasePlugin
+import org.bukkit.plugin.java.JavaPlugin
 
 lateinit var templatePlugin: AuctionPlugin
 
-class AuctionPlugin : BasePlugin() {
+class AuctionPlugin : JavaPlugin() {
     override fun onEnable() {
         super.onEnable()
         templatePlugin = this
         AuctonCommand.initialize(this)
-    }
-
-    override fun onDisable() {
-        super.onDisable()
     }
 }
 

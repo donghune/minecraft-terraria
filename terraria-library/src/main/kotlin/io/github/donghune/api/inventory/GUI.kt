@@ -12,20 +12,23 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryOpenEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.plugin.java.JavaPlugin
 
 abstract class GUI(
+    private val player: Player,
     private val title: String,
     private val size: Int,
 ) : Listener {
 
     private val clickEvents: MutableMap<Int, suspend (InventoryClickEvent) -> Unit> = mutableMapOf()
     protected val inventory by lazy { Bukkit.createInventory(null, size, title.chatColor()) }
-    lateinit var player: Player
 
-    fun content(block: suspend () -> Unit) {
+    fun inventory(block: suspend () -> Unit) {
         content = block
     }
+
+    suspend fun button(itemStack: ItemStack, index: Int, block: suspend (InventoryClickEvent) -> Unit) =
+        setItem(index, itemStack, block)
+
 
     fun onInventoryClose(block: suspend InventoryCloseEvent.() -> Unit) {
         onInventoryClose = block
@@ -66,6 +69,7 @@ abstract class GUI(
             return
         }
 
+        event.isCancelled = true
         clickEvents[event.rawSlot]?.invoke(event)
     }
 
@@ -81,7 +85,7 @@ abstract class GUI(
         InventoryOpenEvent.getHandlerList().unregister(this)
     }
 
-    suspend fun refreshContent() {
+    suspend open fun refreshContent() {
         inventory.clear()
         clickEvents.clear()
         InventoryClickEvent.getHandlerList().unregister(this@GUI)
@@ -89,20 +93,19 @@ abstract class GUI(
         content()
     }
 
-    fun open(player: Player) {
+    fun open() {
         plugin.launch {
             Bukkit.getPluginManager().registerSuspendingEvents(this@GUI, plugin)
-            this@GUI.player = player
             player.openInventory(inventory)
             content()
         }
     }
 
-    fun openLater(player: Player) {
-        Bukkit.getScheduler().runTaskLater(plugin, Runnable { open(player) }, 1L)
+    fun openLater() {
+        Bukkit.getScheduler().runTaskLater(plugin, Runnable { open() }, 1L)
     }
 
-    suspend fun setItem(index: Int, itemStack: ItemStack, onClick: suspend InventoryClickEvent.() -> Unit = {}) {
+    fun setItem(index: Int, itemStack: ItemStack, onClick: suspend InventoryClickEvent.() -> Unit = {}) {
         inventory.setItem(index, itemStack)
         clickEvents[index] = onClick
     }

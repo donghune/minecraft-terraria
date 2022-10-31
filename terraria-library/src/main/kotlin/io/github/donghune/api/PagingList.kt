@@ -7,7 +7,7 @@ class PagingList<T>(
     private val itemCount: Int,
     private val list: List<T>,
 ) {
-    private var cursor = 0
+    var cursor = 0
     private val chunkedList = list.chunked(itemCount)
 
     fun next() {
