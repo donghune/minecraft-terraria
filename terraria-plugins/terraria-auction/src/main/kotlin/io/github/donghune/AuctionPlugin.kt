@@ -1,10 +1,10 @@
 package io.github.donghune
 
-import org.bukkit.plugin.java.JavaPlugin
+import io.github.donghune.api.BasePlugin
 
 lateinit var templatePlugin: AuctionPlugin
 
-class AuctionPlugin : JavaPlugin() {
+class AuctionPlugin : BasePlugin() {
     override fun onEnable() {
         super.onEnable()
         templatePlugin = this

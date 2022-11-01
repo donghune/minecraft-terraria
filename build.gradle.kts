@@ -2,6 +2,9 @@ buildscript {
     repositories {
         gradlePluginPortal()
     }
+    dependencies {
+        classpath("gradle.plugin.com.github.johnrengelman:shadow:7.1.2")
+    }
 }
 
 plugins {
@@ -23,6 +26,11 @@ allprojects {
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "com.github.johnrengelman.shadow")
+
+    tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+        archiveFileName.set("${project.name}.jar")
+    }
 
     repositories {
         maven("https://papermc.io/repo/repository/maven-public/")
