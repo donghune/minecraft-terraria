@@ -7,7 +7,7 @@ object AuctonCommand {
         plugin.kommand {
             register("auction") {
                 executes {
-                    player.sendMessage("A")
+                    println("A")
                 }
             }
         }
