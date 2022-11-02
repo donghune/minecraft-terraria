@@ -39,11 +39,12 @@ jobs:
           arguments: clean build shadowJar
 
       - name: Upload a file to Google Drive
-        uses: Jodebu/upload-to-drive@master
+        uses: willo32/google-drive-upload-action@v1
         with:
           target: terraria-plugins/terraria-auction/build/libs/terraria-auction.jar
           credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
-          folder: ${{ env.MY_DATE }}
+          parent_folder_id: 1gRk9mOdXU3yptRD9KeE-y979Z9fFPU8j
+          child_folder: ${{ env.MY_DATE }}
 
       - name: Send message to discord channel
         uses: aar0nsky/discord-webhook-github-action@main
