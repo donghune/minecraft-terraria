@@ -41,10 +41,10 @@ object AuctonCommand {
                             }
                         }
                     }
-                    then("open") {
-                        executes {
-                            openAuctionMenu(player)
-                        }
+                }
+                then("open") {
+                    executes {
+                        openAuctionMenu(player)
                     }
                 }
             }
@@ -70,10 +70,10 @@ object AuctonCommand {
                             }
                         }
                     }
-                    then("열기") {
-                        executes {
-                            openAuctionMenu(player)
-                        }
+                }
+                then("열기") {
+                    executes {
+                        openAuctionMenu(player)
                     }
                 }
             }
