@@ -43,7 +43,7 @@ jobs:
         with:
           target: terraria-plugins/terraria-auction/build/libs/terraria-auction.jar
           credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
-          parent_folder_id: 1gRk9mOdXU3yptRD9KeE-y979Z9fFPU8j
+          parent_folder_id: ${{ secrets.GROUP_FOLDER_ID }}
           child_folder: ${{ env.MY_DATE }}
 
       - name: Send message to discord channel
@@ -51,4 +51,4 @@ jobs:
         with:
           webhook_id: ${{ secrets.WEBHOOK_ID }}
           webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
-          message: 플러그인이 새로운 버전으로 업데이트 되었습니다!!\nhttps://drive.google.com/drive/folders/1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI?usp=sharing
+          message: 플러그인이 새로운 버전으로 업데이트 되었습니다!!\nhttps://drive.google.com/drive/folders/${{ secrets.GROUP_FOLDER_ID }}
