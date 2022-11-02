@@ -4,9 +4,10 @@ import io.github.donghune.inventory.AuctionCategory
 import io.github.donghune.model.AuctionProduct
 import io.github.donghune.model.create
 import io.github.monun.kommand.KommandArgument.Companion.dynamicByEnum
+import io.github.monun.kommand.PluginKommand
 import io.github.monun.kommand.getValue
 import io.github.monun.kommand.kommand
-import org.bukkit.command.CommandSender
+import io.github.monun.kommand.node.LiteralNode
 import org.bukkit.entity.Player
 import java.time.LocalDateTime
 import java.util.*
@@ -15,17 +16,14 @@ object AuctonCommand {
 
     private val auctionCategoryEnum = dynamicByEnum(EnumSet.allOf(AuctionCategory::class.java))
 
-    private val korCommandDescription = listOf(
-        "경매장 등록 <category> <price>"
-    )
-
-    private val engCommandDescription = listOf(
-        "auction register <category> <price>"
-    )
-
     fun initialize(plugin: AuctionPlugin) {
         plugin.kommand {
-            register("auction") {
+            register(
+                command = "auction",
+                description = listOf(
+                    "auction register <category> <price>"
+                )
+            ) {
                 then("register") {
                     then("category" to auctionCategoryEnum) {
                         then("price" to int()) {
@@ -42,11 +40,11 @@ object AuctonCommand {
                         }
                     }
                 }
-                executes {
-                    sender.sendCommandDescription(engCommandDescription)
-                }
             }
-            register("경매장") {
+            register(
+                command = "경매장",
+                description = listOf("경매장 등록 <category> <price>")
+            ) {
                 then("등록") {
                     then("category" to auctionCategoryEnum) {
                         then("price" to int()) {
@@ -62,9 +60,6 @@ object AuctonCommand {
                             }
                         }
                     }
-                }
-                executes {
-                    sender.sendCommandDescription(korCommandDescription)
                 }
             }
         }
@@ -82,11 +77,17 @@ object AuctonCommand {
         player.sendMessage("경매장에 물건이 등록되었습니다.")
     }
 
-    private fun CommandSender.sendCommandDescription(commands : List<String>) {
-        sendMessage("")
-        commands.forEach {
-            sendMessage(it)
+    private fun PluginKommand.register(command: String, description: List<String>, init: LiteralNode.() -> Unit) {
+        register(command) {
+            init()
+            executes {
+                sender.sendMessage("")
+                sender.sendMessage("========== [ $command 도움말 ] ==========")
+                description.forEach {
+                    sender.sendMessage(it)
+                }
+                sender.sendMessage("")
+            }
         }
-        sendMessage("")
     }
 }
