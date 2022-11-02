@@ -30,20 +30,20 @@ class MainInventory(player: Player) : GUI(player, "메뉴 선택", 9) {
 
     init {
         inventory {
-            button(CATEGORY, 1) {
+            button(CATEGORY, 0) {
                 CategoryInventory(player).open()
             }
-            button(DID, 2) {
+            button(DID, 1) {
                 DidInventory(player).open()
             }
-            button(CANCEL, 3) {
+            button(CANCEL, 2) {
                 if (player.isOp) {
                     CancelAdminInventory(player).open()
                 } else {
                     CancelInventory(player).open()
                 }
             }
-            button(RECEIVE, 4) {
+            button(RECEIVE, 3) {
                 ReceiveInventory(player).open()
             }
         }

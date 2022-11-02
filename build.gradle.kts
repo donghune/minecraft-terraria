@@ -47,7 +47,6 @@ subprojects {
         compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
         compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
-        compileOnly("io.github.monun:kommand-api:2.14.0")
         compileOnly("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.6.0")
         compileOnly("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.6.0")
         compileOnly("com.github.MilkBowl:VaultAPI:1.7")
