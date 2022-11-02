@@ -4,11 +4,6 @@ main: io.github.donghune.AuctionPlugin
 api-version: 1.18
 prefix: DHE
 description: minecraft project donghune source
-commands:
-  auction:
-    description: english version
-  경매장:
-    description: korea version
 libraries:
   - net.kyori:adventure-api:4.10.1
   - io.github.monun:kommand-core:2.14.0
