@@ -41,33 +41,9 @@ jobs:
       - name: Upload a file to Google Drive
         uses: willo32/google-drive-upload-action@v1
         with:
-          target: carrot-plugins/carrot-bingo/build/libs/carrot-bingo.jar
+          target: terraria-plugins/terraria-auction/build/libs/terraria-auction.jar
           credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
-          parent_folder_id: 1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI
-          child_folder: ${{ env.MY_DATE }}
-
-      - name: Upload a file to Google Drive
-        uses: willo32/google-drive-upload-action@v1
-        with:
-          target: carrot-plugins/carrot-visitor/build/libs/carrot-visitor.jar
-          credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
-          parent_folder_id: 1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI
-          child_folder: ${{ env.MY_DATE }}
-
-      - name: Upload a file to Google Drive
-        uses: willo32/google-drive-upload-action@v1
-        with:
-          target: carrot-plugins/carrot-custom-regen/build/libs/carrot-custom-regen.jar
-          credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
-          parent_folder_id: 1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI
-          child_folder: ${{ env.MY_DATE }}
-
-      - name: Upload a file to Google Drive
-        uses: willo32/google-drive-upload-action@v1
-        with:
-          target: carrot-plugins/carrot-fishgame/build/libs/carrot-fishgame.jar
-          credentials: ${{ secrets.DRIVE_SERVICE_ACCOUNT_CREDENTIALS }}
-          parent_folder_id: 1o14oRhATuYa7Zsdyq-reHk9HykE4zfgI
+          parent_folder_id: 1gRk9mOdXU3yptRD9KeE-y979Z9fFPU8j
           child_folder: ${{ env.MY_DATE }}
 
       - name: Send message to discord channel

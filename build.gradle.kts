@@ -34,6 +34,7 @@ subprojects {
 
     repositories {
         maven("https://papermc.io/repo/repository/maven-public/")
+        maven("https://jitpack.io")
     }
 
     dependencies {
@@ -49,6 +50,7 @@ subprojects {
         compileOnly("io.github.monun:kommand-api:2.14.0")
         compileOnly("com.github.shynixn.mccoroutine:mccoroutine-bukkit-api:2.6.0")
         compileOnly("com.github.shynixn.mccoroutine:mccoroutine-bukkit-core:2.6.0")
+        compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     }
 }
 
