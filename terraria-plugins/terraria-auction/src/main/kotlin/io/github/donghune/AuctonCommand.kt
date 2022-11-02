@@ -1,6 +1,7 @@
 package io.github.donghune
 
 import io.github.donghune.inventory.AuctionCategory
+import io.github.donghune.inventory.MainInventory
 import io.github.donghune.model.AuctionProduct
 import io.github.donghune.model.create
 import io.github.monun.kommand.KommandArgument.Companion.dynamicByEnum
@@ -21,6 +22,7 @@ object AuctonCommand {
             register(
                 command = "auction",
                 description = listOf(
+                    "auction open",
                     "auction register <category> <price>"
                 )
             ) {
@@ -39,11 +41,19 @@ object AuctonCommand {
                             }
                         }
                     }
+                    then("open") {
+                        executes {
+                            openAuctionMenu(player)
+                        }
+                    }
                 }
             }
             register(
                 command = "경매장",
-                description = listOf("경매장 등록 <category> <price>")
+                description = listOf(
+                    "경매장 열기",
+                    "경매장 등록 <category> <price>"
+                )
             ) {
                 then("등록") {
                     then("category" to auctionCategoryEnum) {
@@ -60,9 +70,18 @@ object AuctonCommand {
                             }
                         }
                     }
+                    then("열기") {
+                        executes {
+                            openAuctionMenu(player)
+                        }
+                    }
                 }
             }
         }
+    }
+
+    private fun openAuctionMenu(player: Player) {
+        MainInventory(player).open()
     }
 
     private fun registerProduct(player: Player, category: AuctionCategory, price: Int) {
