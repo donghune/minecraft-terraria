@@ -8,7 +8,7 @@ import io.github.donghune.inventory.dsl.NEXT
 import io.github.donghune.inventory.dsl.PREVIOUS
 import io.github.donghune.model.AuctionProduct
 import io.github.donghune.model.AuctionProductManager
-import io.github.donghune.model.config
+import io.github.donghune.model.auctionConfig
 import io.github.donghune.model.delete
 import io.github.donghune.util.money
 import org.bukkit.entity.Player
@@ -31,7 +31,8 @@ class CancelInventory(player: Player) : GUI(player, "취소", 54) {
 
                     data.delete()
                     player.inventory.addItem(data.itemStack)
-                    player.money += (data.price * config.cancelTax).toInt()
+                    player.money += (data.price * auctionConfig.cancelTax).toInt()
+                    auctionConfig.reserveTax((data.price * auctionConfig.cancelTax).toInt())
                     player.sendMessage("아이템을 취소하였습니다.")
                     refreshContent()
                 }

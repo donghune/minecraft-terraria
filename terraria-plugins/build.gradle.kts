@@ -36,6 +36,7 @@ subprojects {
 
     dependencies {
         implementation(project(":terraria-library"))
+        compileOnly("io.github.monun:kommand-api:2.14.0")
     }
 }
 

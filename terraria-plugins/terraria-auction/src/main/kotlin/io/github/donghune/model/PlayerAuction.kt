@@ -4,13 +4,14 @@ import io.github.donghune.api.manager.Entity
 import io.github.donghune.api.manager.EntityManager
 import kotlinx.serialization.Contextual
 import org.bukkit.entity.Player
-import java.util.*
+import java.time.LocalDateTime
 
 @kotlinx.serialization.Serializable
 data class PlayerAuction(
     val uuid: String,
     val dids: MutableList<String> = mutableListOf(),
     val tradeResults: MutableList<@Contextual AuctionTradeResult> = mutableListOf(),
+    val createAt: @Contextual LocalDateTime = LocalDateTime.now(),
 ) : Entity(uuid)
 
 fun PlayerAuction.create() = PlayerAuctionManager.create(this)

@@ -78,10 +78,12 @@ object AuctionProductManager : EntityManager<AuctionProduct>(
         auctionProduct.seller().auction.update { currentPlayerAuction ->
             currentPlayerAuction.tradeResults.add(
                 AuctionTradeResult(
-                    money = (auctionProduct.price * (1 - config.tradeTax)).toInt()
+                    money = (auctionProduct.price * (1 - auctionConfig.tradeTax)).toInt()
                 )
             )
         }
+
+        auctionConfig.reserveTax((auctionProduct.price * auctionConfig.tradeTax).toInt())
 
         buyer.sendMessage("거래가 성사되었습니다. 경매장에서 수령해주세요")
         auctionProduct.seller()
